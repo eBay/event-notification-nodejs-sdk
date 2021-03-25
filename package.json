@@ -1,0 +1,29 @@
+{
+  "name": "event-notification-nodejs-sdk",
+  "version": "1.0.0",
+  "description": "A NodeJS SDK for processing eBay event notifications",
+  "main": "lib/index.js",
+  "scripts": {
+    "start": "node examples/example.js",
+    "test": "eslint . && mocha"
+  },
+  "keywords": [
+    "eBay"
+  ],
+  "author": "Lokesh Rishi",
+  "license": "ISC",
+  "dependencies": {
+    "axios": "^0.21.1",
+    "ebay-oauth-nodejs-client": "^1.2.1",
+    "express": "^4.17.1",
+    "lru-cache": "^6.0.0"
+  },
+  "devDependencies": {
+    "axios-mock-adapter": "^1.19.0",
+    "chai": "^4.2.0",
+    "eslint": "^6.8.0",
+    "eslint-config-ebay": "^1.1.1",
+    "mocha": "^6.1.4",
+    "nock": "^13.0.11"
+  }
+}

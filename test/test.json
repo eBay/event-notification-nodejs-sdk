@@ -1,0 +1,106 @@
+{
+    "VALID": {
+        "signature": "eyJhbGciOiJlY2RzYSIsImtpZCI6Ijk5MzYyNjFhLTdkN2ItNDYyMS1hMGYxLTk2Y2NiNDI4YWY0OSIsInNpZ25hdHVyZSI6Ik1FWUNJUUNmeGZJV3V4bVdjSUJRSjljNS9YN2lHREpxczJSQ0dzQkVhQWppbnlycmZBSWhBSVY2d0djVGlCdVY1S0pVaWYyaG9reXJMK1E5c3NIa2FkK214Mm5FRTI1dyIsImRpZ2VzdCI6IlNIQTEifQ==",
+        "message": {
+            "metadata": {
+                "topic": "MARKETPLACE_ACCOUNT_DELETION",
+                "schemaVersion": "1.0",
+                "deprecated": false
+            },
+            "notification": {
+                "notificationId": "49feeaeb-4982-42d9-a377-9645b8479411_33f7e043-fed8-442b-9d44-791923bd9a6d",
+                "eventDate": "2021-03-19T20:43:59.462Z",
+                "publishDate": "2021-03-19T20:43:59.679Z",
+                "publishAttemptCount": 1,
+                "data": {
+                    "username": "test_user",
+                    "userId": "ma8vp1jySJC",
+                    "eiasToken": "nY+sHZ2PrBmdj6wVnY+sEZ2PrA2dj6wJnY+gAZGEpwmdj6x9nY+seQ=="
+                }
+            }
+        },
+        "response": {
+            "key": "-----BEGIN PUBLIC KEY-----MFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAEZhhxXKtR+TOvtDbgTPCkSof02qgBB7IsYOyf76ilExJ/upAa/vKIKheOoCyOpcLmi4t0b4uepb7LLjmMr90FUg==-----END PUBLIC KEY-----",
+            "algorithm": "ECDSA",
+            "digest": "SHA1"
+        },
+        "public_key": "9936261a-7d7b-4621-a0f1-96ccb428af49"
+    },
+    "INVALID": {
+        "signature": "eyJhbGciOiJlY2RzYSIsImtpZCI6Ijk5MzYyNjFhLTdkN2ItNDYyMS1hMGYxLTk2Y2NiNDI4YWY0OSIsInNpZ25hdHVyZSI6Ik1FWUNJUUNmeGZJV3V4bVdjSUJRSjljNS9YN2lHREpxczJSQ0dzQkVhQWppbnlycmZBSWhBSVY2d0djVGlCdVY1S0pVaWYyaG9reXJMK1E5c3NIa2FkK214Mm5FRTI1dyIsImRpZ2VzdCI6IlNIQTEifQ==",
+        "message": {
+            "metadata": {
+                "topic": "MARKETPLACE_ACCOUNT_DELETION",
+                "schemaVersion": null,
+                "deprecated": false
+            },
+            "notification": {
+                "notificationId": "a8056b59-5d45-43af-b235-d8707e9cd8f8_27d7b146-b03f-4b8a-846e-9aa1f750a969",
+                "eventDate": "2021-03-11T19:13:43.982Z",
+                "publishDate": "2021-03-11T19:13:44.209Z",
+                "publishAttemptCount": 1000,
+                "data": {
+                    "username": "test_user",
+                    "userId": "ma8vp1jySJC",
+                    "eiasToken": "nY+sHZ2PrBmdj6wVnY+sEZ2PrA2dj6wJnY+gAZGEpwmdj6x9nY+seQ=="
+                }
+            }
+        },
+        "response": {
+            "key": "-----BEGIN PUBLIC KEY-----MFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAEZhhxXKtR+TOvtDbgTPCkSof02qgBB7IsYOyf76ilExJ/upAa/vKIKheOoCyOpcLmi4t0b4uepb7LLjmMr90FUg==-----END PUBLIC KEY-----",
+            "algorithm": "ECDSA",
+            "digest": "SHA1"
+        },
+        "public_key": "9936261a-7d7b-4621-a0f1-96ccb428af47"
+    },
+    "SIGNATURE_MISMATCH": {
+        "signature": "eyJhbGciOiJlY2RzYSIsImtpZCI6Ijk5MzYyNjFhLTdkN2ItNDYyMS1hMGYxLTk2Y2NiNDI4YWY0OSIsInNpZ25hdHVyZSI6Ik1FVUNJUUNHY1NubUFrVGZyK1paMlZnMGJXRW9zOGEvdGVCcWk3UGU2OCtoR21MTUNRSWdlRnZrcnRvKzhkczhSVndJM0dnbjFtTUdDck5NRVpKM1NSbE8yZngveHFJPSIsImRpZ2VzdCI6IlNIQTEifQ==",
+        "message": {
+            "metadata": {
+                "topic": "MARKETPLACE_ACCOUNT_DELETION",
+                "schemaVersion": "1.0",
+                "deprecated": false
+            },
+            "notification": {
+                "notificationId": "49feeaeb-4982-42d9-a377-9645b8479411_33f7e043-fed8-442b-9d44-791923bd9a6d",
+                "eventDate": "2021-03-19T20:43:59.462Z",
+                "publishDate": "2021-03-19T20:43:59.679Z",
+                "publishAttemptCount": 1,
+                "data": {
+                    "username": "test_user",
+                    "userId": "ma8vp1jySJC",
+                    "eiasToken": "nY+sHZ2PrBmdj6wVnY+sEZ2PrA2dj6wJnY+gAZGEpwmdj6x9nY+seQ=="
+                }
+            }
+        },
+        "response": {
+            "key": "-----BEGIN PUBLIC KEY-----MFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAEZhhxXKtR+TOvtDbgTPCkSof02qgBB7IsYOyf76ilExJ/upAa/vKIKheOoCyOpcLmi4t0b4uepb7LLjmMr90FUg==-----END PUBLIC KEY-----",
+            "algorithm": "ECDSA",
+            "digest": "SHA1"
+        },
+        "public_key": "9936261a-7d7b-4621-a0f1-96ccb428af46"
+    },
+    "ERROR": {
+        "signature": "eyJhbGciOiJlY2RzYSIsImtpZCI6Ijk5MzYyNjFhLTdkN2ItNDYyMS1hMGYxLTk2Y2NiNDI4YWY0OSIsInNpZ25hdHVyZSI6Ik1FWUNJUUNmeGZJV3V4bVdjSUJRSjljNS9YN2lHREpxczJSQ0dzQkVhQWppbnlycmZBSWhBSVY2d0djVGlCdVY1S0pVaWYyaG9reXJMK1E5c3NIa2FkK214Mm5FRTI1dyIsImRpZ2VzdCI6IlNIQTEifQ==",
+        "message": {
+            "metadata": {
+                "topic": "MARKETPLACE_ACCOUNT_DELETION",
+                "schemaVersion": "1.0",
+                "deprecated": false
+            },
+            "notification": {
+                "notificationId": "49feeaeb-4982-42d9-a377-9645b8479411_33f7e043-fed8-442b-9d44-791923bd9a6d",
+                "eventDate": "2021-03-19T20:43:59.462Z",
+                "publishDate": "2021-03-19T20:43:59.679Z",
+                "publishAttemptCount": 1,
+                "data": {
+                    "username": "test_user",
+                    "userId": "ma8vp1jySJC",
+                    "eiasToken": "nY+sHZ2PrBmdj6wVnY+sEZ2PrA2dj6wJnY+gAZGEpwmdj6x9nY+seQ=="
+                }
+            }
+        },
+        "response": null,
+        "public_key": "9936261a-7d7b-4621-a0f1-96ccb428af99"
+    }
+}
