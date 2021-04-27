@@ -1,6 +1,6 @@
 {
   "name": "event-notification-nodejs-sdk",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A NodeJS SDK for processing eBay event notifications",
   "main": "lib/index.js",
   "repository": {
@@ -18,7 +18,8 @@
   "keywords": [
     "eBay",
     "Event Notification",
-    "SDK"
+    "SDK",
+    "Endpoint Validation"
   ],
   "author": "Lokesh Rishi",
   "license": "ISC",

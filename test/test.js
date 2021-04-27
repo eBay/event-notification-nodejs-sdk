@@ -32,11 +32,28 @@ const identityApiPath = '/identity/v1/oauth2/token';
 const notificationApiPath = '/commerce/notification/v1/public_key/';
 
 const axiosMock = new MockAdapter(axios, { delayResponse: 100 });
+const { createHash } = require('crypto');
+
+const env = {
+    production: 'PRODUCTION',
+    sandbox: 'SANDBOX'
+};
 
 const sampleConfig = {
-    clientId: 'clientId',
-    clientSecret: 'clientSecret',
-    environment: 'PRODUCTION'
+    'SANDBOX': {
+        'clientId': 'clientId',
+        'clientSecret': 'clientSecret',
+        'devid': 'devid',
+        'redirectUri': 'redirectUri',
+        'baseUrl': 'api.sandbox.ebay.com'
+    },
+    'PRODUCTION': {
+        'clientId': 'clientId',
+        'clientSecret': 'clientSecret',
+        'devid': 'devid',
+        'redirectUri': 'redirectUri',
+        'baseUrl': 'api.ebay.com'
+    }
 };
 
 describe('Test Notification SDK', () => {
@@ -92,11 +109,23 @@ describe('Test Notification SDK', () => {
         }
     });
 
+    it('should throw an error if environment is not provided', async () => {
+        try {
+            await EventNotificationSDK.process({ metadata: {}, notification: {} },
+                'signature', sampleConfig);
+        } catch (err) {
+            expect(err.message).to.equal('Please provide the environment.');
+        }
+    });
+
     it('should throw an error if Client ID is not provided', async () => {
         try {
             await EventNotificationSDK.process(
                 { metadata: {}, notification: {} }, 'signature',
-                { clientSecret: 'clientSecret', environment: 'PRODUCTION' });
+                {
+                    PRODUCTION: { clientSecret: 'clientSecret' },
+                    SANDBOX: { clientSecret: 'clientSecret' }
+                }, env.production);
         } catch (err) {
             expect(err.message).to.equal('Please provide the Client ID.');
         }
@@ -106,7 +135,10 @@ describe('Test Notification SDK', () => {
         try {
             await EventNotificationSDK.process(
                 { metadata: {}, notification: {} }, 'signature',
-                { clientId: 'clientId', environment: 'PRODUCTION' });
+                {
+                    SANDBOX: { clientId: 'clientId' },
+                    PRODUCTION: { clientId: 'clientId' }
+                }, env.sandbox);
         } catch (err) {
             expect(err.message).to.equal('Please provide the Client Secret.');
         }
@@ -116,7 +148,13 @@ describe('Test Notification SDK', () => {
         try {
             await EventNotificationSDK.process(
                 { metadata: {}, notification: {} }, 'signature',
-                { clientSecret: 'clientSecret', clientId: 'clientId' });
+                {
+                    PRODUCTION:
+                    {
+                        clientSecret: 'clientSecret',
+                        clientId: 'clientId'
+                    }
+                }, env.production);
         } catch (err) {
             expect(err.message).to.equal('Please provide the Environment.');
         }
@@ -139,7 +177,7 @@ describe('Test Notification SDK', () => {
 
         EventNotificationSDK.process(testData.VALID.message,
             testData.VALID.signature,
-            sampleConfig)
+            sampleConfig, env.production)
             .then((responseCode) => {
                 expect(responseCode).to.equal(204);
             }).catch((ex) => {
@@ -164,7 +202,7 @@ describe('Test Notification SDK', () => {
 
         EventNotificationSDK.process(testData.INVALID.message,
             testData.INVALID.signature,
-            sampleConfig)
+            sampleConfig, env.production)
             .then((responseCode) => {
                 expect(responseCode).to.equal(412);
             }).catch((ex) => {
@@ -188,7 +226,7 @@ describe('Test Notification SDK', () => {
         });
 
         EventNotificationSDK.process(testData.SIGNATURE_MISMATCH.message,
-            testData.SIGNATURE_MISMATCH.signature, sampleConfig)
+            testData.SIGNATURE_MISMATCH.signature, sampleConfig, env.production)
             .then((responseCode) => {
                 expect(responseCode).to.equal(412);
             }).catch((ex) => {
@@ -212,7 +250,7 @@ describe('Test Notification SDK', () => {
         });
 
         EventNotificationSDK.process(testData.ERROR.message,
-            testData.ERROR.signature, sampleConfig)
+            testData.ERROR.signature, sampleConfig, env.production)
             .then((responseCode) => {
                 assert.equal(responseCode, 500);
             }).catch((ex) => {
@@ -234,12 +272,83 @@ describe('Test Notification SDK', () => {
         }).reply(500, null);
 
         EventNotificationSDK.process(testData.SIGNATURE_MISMATCH.message,
-            testData.SIGNATURE_MISMATCH.signature, sampleConfig)
+            testData.SIGNATURE_MISMATCH.signature, sampleConfig, env.production)
             .then((responseCode) => {
                 assert.equal(responseCode, 500);
             }).catch((ex) => {
                 console.error(`Failed: ${ex}`);
             });
+    });
+
+    it('should return the correct challenge response', () => {
+        const challengeCode = '71745723-d031-455c-bfa5-f90d11b4f20a';
+        const config = {
+            endpoint: 'http://www.testendpoint.com/webhook',
+            verificationToken: '71745723-d031-455c-bfa5-f90d11b4f20a'
+        };
+
+        const hash = createHash('sha256');
+
+        hash.update(challengeCode);
+        hash.update(config.verificationToken);
+        hash.update(config.endpoint);
+
+        const responseHash = hash.digest('hex');
+        const expectedResponse = Buffer.from(responseHash).toString();
+
+        const challengeResponse = EventNotificationSDK.validateEndpoint(
+            challengeCode,
+            config);
+
+        assert.equal(expectedResponse, challengeResponse);
+    });
+
+    it('should return error if verificationToken is missing', () => {
+        const challengeCode = '71745723-d031-455c-bfa5-f90d11b4f20a';
+        const config = {
+            endpoint: 'http://www.testendpoint.com/webhook'
+        };
+
+        try {
+            EventNotificationSDK.validateEndpoint(
+                challengeCode,
+                config);
+            assert.fail('Expected exception');
+        } catch (ex) {
+            assert.equal('The "verificationToken" is required.', ex.message);
+        }
+    });
+
+    it('should return error if endpoint is missing', () => {
+        const challengeCode = '71745723-d031-455c-bfa5-f90d11b4f20a';
+        const config = {
+            verificationToken: '71745723-d031-455c-bfa5-f90d11b4f20a'
+        };
+
+        try {
+            EventNotificationSDK.validateEndpoint(
+                challengeCode,
+                config);
+            assert.fail('Expected exception');
+        } catch (ex) {
+            assert.equal('The "endpoint" is required.', ex.message);
+        }
+    });
+
+    it('should return error if endpoint is missing', () => {
+        const config = {
+            endpoint: 'http://www.testendpoint.com/webhook',
+            verificationToken: '71745723-d031-455c-bfa5-f90d11b4f20a'
+        };
+
+        try {
+            EventNotificationSDK.validateEndpoint(
+                null,
+                config);
+            assert.fail('Expected exception');
+        } catch (ex) {
+            assert.equal('The "challengeCode" is required.', ex.message);
+        }
     });
 });
 

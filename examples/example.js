@@ -24,10 +24,11 @@
 const express = require('express');
 const app = express();
 
-const config = require('./config');
+const config = require('./config.json');
 const constants = require('../lib/constants');
 const EventNotificationSDK = require('../lib/index');
 
+const environment = 'PRODUCTION';
 const PORT = process.env.PORT || 8080;
 
 app.use(express.json());
@@ -36,7 +37,8 @@ app.post('/webhook', (req, res) => {
     EventNotificationSDK.process(
         req.body,
         req.headers[constants.X_EBAY_SIGNATURE],
-        config
+        config,
+        environment
     ).then((responseCode) => {
         if (responseCode === constants.HTTP_STATUS_CODE.NO_CONTENT) {
             console.log(`Message processed successfully for: \n- Topic: ${req.body.metadata.topic} \n- NotificationId: ${req.body.notification.notificationId}\n`);
@@ -48,6 +50,25 @@ app.post('/webhook', (req, res) => {
         console.error(`Signature validation processing failure: ${ex}\n`);
         res.status(constants.HTTP_STATUS_CODE.INTERNAL_SERVER_ERROR).send();
     });
+});
+
+app.get('/webhook', (req, res) => {
+    if (req.query.challenge_code) {
+        try {
+            const challengeResponse = EventNotificationSDK.validateEndpoint(
+                req.query.challenge_code,
+                config);
+            res.status(200).send({
+                challengeResponse: challengeResponse
+            });
+        } catch (e) {
+            // eslint-disable-next-line no-console
+            console.error(`Endpoint validation failure: ${e}`);
+            res.status(constants.HTTP_STATUS_CODE.INTERNAL_SERVER_ERROR).send();
+        }
+    } else {
+        res.status(constants.HTTP_STATUS_CODE.INTERNAL_SERVER_ERROR).send();
+    }
 });
 
 app.listen(PORT, () => {
