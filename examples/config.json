@@ -1,0 +1,18 @@
+{
+    "SANDBOX": {
+        "clientId": "<appid-from-developer-portal>",
+        "clientSecret": "<certid-from-developer-portal>",
+        "devid": "<devid-from-developer-portal>",
+        "redirectUri": "<redirect_uri-from-developer-portal>",
+        "baseUrl": "api.sandbox.ebay.com"
+    },
+    "PRODUCTION": {
+        "clientId": "<appid-from-developer-portal>",
+        "clientSecret": "<certid-from-developer-portal>",
+        "devid": "<devid-from-developer-portal>",
+        "redirectUri": "<redirect_uri-from-developer-portal>",
+        "baseUrl": "api.ebay.com"
+    },
+    "endpoint": "http://www.testendpoint.com/webhook",
+    "verificationToken": "71745723-d031-455c-bfa5-f90d11b4f20a"
+}
