@@ -30,8 +30,8 @@ This SDK incorporates
   - Use key id from the decoded signature header to fetch public key required by the verification algorithm. An LRU cache is used to prevent refetches for same 'key'.
   - On verification success, delegate processing to the registered custom message processor and respond with a 204 HTTP status code.
   - On verification failure, respond back with a 412 HTTP status code
-  - With release 1.1.0 - includes support for generating the challenge response required for validating this endpoint.
-More details on endpoint validation is documented [here](https://developer.ebay.com/marketplace-account-deletion).
+  - Release v1.0.1 includes support for generating the challenge response required for validating this endpoint.
+For more details on endpoint validation please refer to the [documentation](https://developer.ebay.com/marketplace-account-deletion).
 
 # Usage
 
