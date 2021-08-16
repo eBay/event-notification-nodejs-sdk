@@ -43,14 +43,14 @@ const sampleConfig = {
     'SANDBOX': {
         'clientId': 'clientId',
         'clientSecret': 'clientSecret',
-        'devid': 'devid',
+        'devId': 'devId',
         'redirectUri': 'redirectUri',
         'baseUrl': 'api.sandbox.ebay.com'
     },
     'PRODUCTION': {
         'clientId': 'clientId',
         'clientSecret': 'clientSecret',
-        'devid': 'devid',
+        'devId': 'devId',
         'redirectUri': 'redirectUri',
         'baseUrl': 'api.ebay.com'
     }
