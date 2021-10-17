@@ -1,6 +1,6 @@
 {
   "name": "event-notification-nodejs-sdk",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "A NodeJS SDK for processing eBay event notifications",
   "main": "lib/index.js",
   "repository": {

@@ -2,14 +2,14 @@
     "SANDBOX": {
         "clientId": "<appid-from-developer-portal>",
         "clientSecret": "<certid-from-developer-portal>",
-        "devid": "<devid-from-developer-portal>",
+        "devId": "<devid-from-developer-portal>",
         "redirectUri": "<redirect_uri-from-developer-portal>",
         "baseUrl": "api.sandbox.ebay.com"
     },
     "PRODUCTION": {
         "clientId": "<appid-from-developer-portal>",
         "clientSecret": "<certid-from-developer-portal>",
-        "devid": "<devid-from-developer-portal>",
+        "devId": "<devid-from-developer-portal>",
         "redirectUri": "<redirect_uri-from-developer-portal>",
         "baseUrl": "api.ebay.com"
     },

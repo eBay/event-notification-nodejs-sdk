@@ -74,14 +74,14 @@ yarn add event-notification-nodejs-sdk
    "SANDBOX": {
        "clientId": "<appid-from-developer-portal>",
        "clientSecret": "<certid-from-developer-portal>",
-       "devid": "<devid-from-developer-portal>",
+       "devId": "<devid-from-developer-portal>",
        "redirectUri": "<redirect_uri-from-developer-portal>",
        "baseUrl": "api.sandbox.ebay.com"
    },
    "PRODUCTION": {
        "clientId": "<appid-from-developer-portal>",
        "clientSecret": "<certid-from-developer-portal>",
-       "devid": "<devid-from-developer-portal>",
+       "devId": "<devid-from-developer-portal>",
        "redirectUri": "<redirect_uri-from-developer-portal>",
        "baseUrl": "api.ebay.com"
    },
@@ -114,7 +114,7 @@ Using yarn:
 yarn start
 ```
 
-Client Credentials Configuration Sample: [config.js](examples/config.js).
+Client Credentials Configuration Sample: [config.json](examples/config.json).
 
 **Note for Production deployment**
 
