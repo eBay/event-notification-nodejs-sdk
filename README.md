@@ -114,7 +114,7 @@ Using yarn:
 yarn start
 ```
 
-Client Credentials Configuration Sample: [config.js](examples/config.js).
+Client Credentials Configuration Sample: [config.json](examples/config.json).
 
 **Note for Production deployment**
 
